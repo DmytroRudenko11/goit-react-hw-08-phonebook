@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { fetchLogout } from 'redux/auth/authOperations';
 import {
   fetchAllContacts,
   addContact,
@@ -26,6 +27,11 @@ export const contactsSlice = createSlice({
   },
   extraReducers: builder => {
     builder
+      .addCase(fetchLogout.fulfilled, (state, action) => {
+        state.contacts.items = [];
+        state.contacts.isLoading = false;
+        state.filter = '';
+      })
       .addCase(fetchAllContacts.fulfilled, (state, action) => {
         state.contacts.items = action.payload;
       })
@@ -41,8 +47,8 @@ export const contactsSlice = createSlice({
       .addMatcher(
         action => action.type.endsWith('/pending'),
         (state, action) => {
-          state.contacts.isLoading = true;
           state.contacts.error = null;
+          state.contacts.isLoading = true;
         }
       )
       .addMatcher(

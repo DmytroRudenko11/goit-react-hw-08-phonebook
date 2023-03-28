@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { selectUsersData } from 'redux/selector';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { fetchLogout } from 'redux/auth/authOperations';
 
 export const UserMenu = () => {
@@ -18,16 +18,13 @@ export const UserMenu = () => {
         <UserData>{usersData.email}</UserData>
         <UserData>{usersData.name}</UserData>
       </UserBox>
-      <LogOutBtn>
-        <NavigationLink to="/" onClick={handleLogOut}>
-          Logout
-        </NavigationLink>
-      </LogOutBtn>
+      <LogOutBtn onClick={handleLogOut}> Logout</LogOutBtn>
     </UserContainer>
   );
 };
 
 const UserContainer = styled.div`
+  height: 100%;
   display: flex;
   gap: 10px;
 `;
@@ -43,26 +40,19 @@ const UserData = styled.p`
   margin: 0;
 `;
 
-const NavigationLink = styled(NavLink)`
+const LogOutBtn = styled.button`
   display: block;
   color: white;
   text-align: center;
   padding: 14px 16px;
-  text-decoration: none;
-
-  &.active {
-    background-color: #4caf50;
-  }
-
-  &:hover:not(.active) {
-    background-color: #111;
-  }
-`;
-
-const LogOutBtn = styled.button`
-  padding: 0;
   border: none;
   background-color: transparent;
   cursor: pointer;
   border-left: 1px solid #bbb;
+
+  &:hover,
+  :focus {
+    outline: none;
+    background-color: #4caf50;
+  }
 `;

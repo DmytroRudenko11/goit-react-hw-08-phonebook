@@ -1,5 +1,6 @@
 export const selectIsLoggedIn = state => state.auth.isLoggedIn;
 export const selectUsersData = state => state.auth.user;
+export const selectAuthLoading = state => state.auth.isLoading;
 
 export const selectContactsItems = state => state.phonebook.contacts.items;
 export const selectFilteredContacts = state => applyFilter(state.phonebook);

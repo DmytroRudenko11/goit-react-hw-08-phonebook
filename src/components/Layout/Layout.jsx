@@ -1,41 +1,61 @@
 import { useSelector } from 'react-redux';
-import { Outlet, NavLink } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import styled from 'styled-components';
-import { selectIsLoggedIn } from 'redux/selector';
+import { selectAuthLoading, selectIsLoggedIn } from 'redux/selector';
+
+import { ThreeCircles } from 'react-loader-spinner';
+
 import { UserMenu } from 'components/Header/UserMenu';
 
 export function Layout() {
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const isLoading = useSelector(selectAuthLoading);
 
   return (
     <div>
       <HeaderBar>
-        <NavBar>
-          <NavList>
-            <NavItem>
-              {' '}
+        <NavList>
+          <NavItem>
+            <NavBar>
+              <NavigationLink to="/">Home</NavigationLink>{' '}
               <NavigationLink to="/contacts">Contacts</NavigationLink>
-            </NavItem>
-            {!isLoggedIn ? (
-              <AuthBox>
-                <NavItem>
-                  <NavigationLink to="/">Login</NavigationLink>
-                </NavItem>
-                <NavItem>
-                  <NavigationLink to="/registration">
-                    Registration
-                  </NavigationLink>
-                </NavItem>
-              </AuthBox>
-            ) : (
+            </NavBar>
+          </NavItem>
+
+          {!isLoggedIn ? (
+            <AuthBox>
               <NavItem>
-                <UserMenu />
+                <NavigationLink to="/login">Login</NavigationLink>
               </NavItem>
-            )}
-          </NavList>
-        </NavBar>
+              <NavItem>
+                <NavigationLink to="/registration">Registration</NavigationLink>
+              </NavItem>
+            </AuthBox>
+          ) : (
+            <NavItem>
+              <UserMenu />
+            </NavItem>
+          )}
+        </NavList>
       </HeaderBar>
-      <Outlet />
+      {isLoading ? (
+        <LoaderBox>
+          <ThreeCircles
+            height="100"
+            width="100"
+            color="#4fa94d"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+            ariaLabel="three-circles-rotating"
+            outerCircleColor=""
+            innerCircleColor=""
+            middleCircleColor=""
+          />
+        </LoaderBox>
+      ) : (
+        <Outlet />
+      )}
     </div>
   );
 }
@@ -43,7 +63,9 @@ export function Layout() {
 const HeaderBar = styled.header`
   background-color: #333;
 `;
-const NavBar = styled.nav``;
+const NavBar = styled.nav`
+  display: flex;
+`;
 
 const AuthBox = styled.div`
   display: flex;
@@ -75,4 +97,12 @@ const NavigationLink = styled(NavLink)`
   &:hover:not(.active) {
     background-color: #111;
   }
+`;
+
+const LoaderBox = styled.div`
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `;

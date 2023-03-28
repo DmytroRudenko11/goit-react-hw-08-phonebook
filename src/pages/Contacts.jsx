@@ -1,6 +1,6 @@
-import { ContactList } from 'components/ContactList/ContactList';
-import { Form } from 'components/Form/Form';
-import { SearchField } from 'components/SearchField/SearchField';
+import { ContactList } from 'components/Contacts/ContactList';
+import { Form } from 'components/Contacts/Form';
+import { SearchField } from 'components/Contacts/SearchField';
 import styled from 'styled-components';
 
 export const Contacts = () => {
