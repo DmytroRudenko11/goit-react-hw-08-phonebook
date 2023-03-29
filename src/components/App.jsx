@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect } from 'react';
@@ -16,9 +16,10 @@ import { Home } from 'pages/Home';
 
 export function App() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
-    dispatch(fetchCurrentUser());
-  }, [dispatch]);
+    dispatch(fetchCurrentUser()).then(() => navigate('/contacts'));
+  }, []);
   return (
     <div>
       <Routes>

@@ -82,7 +82,7 @@ export const Registation = () => {
         </Label>
         <SubmitBtn>Create Account</SubmitBtn>
       </SignUpForm>
-      <RedirectLink to="/">Do you have account already?</RedirectLink>
+      <RedirectLink to="/login">Do you have account already?</RedirectLink>
     </Section>
   );
 };
