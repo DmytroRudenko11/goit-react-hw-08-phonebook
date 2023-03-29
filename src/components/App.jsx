@@ -1,5 +1,5 @@
-import { Routes, Route } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -16,6 +16,7 @@ import { Home } from 'pages/Home';
 
 export function App() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(fetchCurrentUser());
   }, [dispatch]);
@@ -49,7 +50,7 @@ export function App() {
             }
           />
 
-          <Route path="*" elemen={<Home />} />
+          <Route path="*" element={<Home />} />
         </Route>
       </Routes>
       <ToastContainer />

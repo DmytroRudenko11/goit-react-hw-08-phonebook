@@ -74,7 +74,7 @@ export const Registation = () => {
         <Label>
           Password
           <Input
-            type="text"
+            type="password"
             name="password"
             value={password}
             onChange={handleChangeInput}

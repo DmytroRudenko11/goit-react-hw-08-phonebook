@@ -17,8 +17,10 @@ export function Layout() {
         <NavList>
           <NavItem>
             <NavBar>
-              <NavigationLink to="/">Home</NavigationLink>{' '}
-              <NavigationLink to="/contacts">Contacts</NavigationLink>
+              <NavigationLink to="/">Home</NavigationLink>
+              {isLoggedIn && (
+                <NavigationLink to="/contacts">Contacts</NavigationLink>
+              )}
             </NavBar>
           </NavItem>
 
