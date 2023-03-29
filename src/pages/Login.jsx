@@ -59,7 +59,7 @@ export const Login = () => {
         <Label>
           Password
           <Input
-            type="text"
+            type="password"
             name="password"
             value={password}
             onChange={handleChangeInput}
